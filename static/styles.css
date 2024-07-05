@@ -1,0 +1,51 @@
+#nav-bar {
+        border-radius: 1px;
+
+}
+#nav-bar a {
+	color:#FFFFF0;
+}
+
+
+.dropdown-menu a {
+	color: black !important;
+}
+
+#back-to-top-btn {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 99;
+            font-size: 16px;
+            border: none;
+            outline: none;
+            background-color: #212529;
+            color: white;
+            cursor: pointer;
+            padding: 15px;
+            border-radius: 50%;
+        }
+#back-to-top-btn:hover {
+        background-color: black;
+        }
+
+
+#new_post_btn {
+        position: relative;left: 50px;
+        background-color: transparent;
+        border: none;padding: 0;
+        color:#FFFFF0;
+
+
+
+}
+
+ @media (max-width: 768px) {
+        #new_post_btn {
+                position: relative;
+                left: -5px;
+        }
+
+ }
+

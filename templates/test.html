@@ -1,0 +1,1 @@
+<a href='{% if post.post_type == "Writing" %} {{url_for("delete", index=post.id)}} {% else %} {{url_for("third.review_delete", id=post.id)}} {% endif %}' class='post-meta' style='color:#E19093;  text-align: center;  text-decoration: none;'> ㄨDelete </a>

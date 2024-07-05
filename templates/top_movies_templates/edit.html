@@ -1,0 +1,36 @@
+{% include "/header.html" %}
+{% extends 'bootstrap/base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block styles %}
+  {{ super() }}
+<style>
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 500px; /* 100% of the viewport height */
+}
+</style>
+{% endblock %}
+
+{% block title %}Edit Movies{% endblock %}
+
+{% block content %}
+
+<div class="content">
+  <h1 class="heading">{{movie.title}}</h1>
+
+  </div>
+<div class='container'>
+<form method='POST' >
+	{{ form.csrf_token }}
+	{{ wtf.form_field(form.rating) }}
+    {{ wtf.form_field(form.review) }}
+	<input class='btn btn-dark' type='submit' value='Done'>
+</form>
+
+
+</div>
+
+{% endblock %}

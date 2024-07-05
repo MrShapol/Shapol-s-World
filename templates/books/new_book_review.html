@@ -1,0 +1,164 @@
+{% include "header.html" %}
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+        function changeTitle() {
+            const selectElement = document.getElementById('options');
+            const selectedOption = selectElement.options[selectElement.selectedIndex].text;
+            const routes = {
+                'Book Review' : '{{ url_for("books.new_review") }}',
+                'Movie Review': '{{ url_for("third.new_review") }}',
+                'Writing': '{{ url_for("new_post") }}'
+                
+            };
+            window.location.href = routes[selectedOption];
+        }
+</script>
+
+<style>
+    .error {
+        color:red;
+    }
+
+.responsive-img {
+    width: 100%;
+    max-width: 600px; /* Adjust this value based on your design */
+    height: auto;
+}
+
+/* Media query for smartphones */
+@media (max-width: 600px) {
+    .responsive-img {
+        max-width: 100%;
+    }
+        .container {
+        padding: 10px;
+    }
+        .form-control {
+        font-size: 20px;
+        padding: 8px;
+    }
+    #form-container {
+    max-width: 400px
+    margin: 0 auto}
+
+        .btn {
+        font-size: 20px;
+        padding: 5px 10px;
+    }
+}
+
+
+
+.page-title {
+    text-align: center;
+}
+
+.label-title {
+    margin-bottom: -46px;
+}
+
+
+</style>
+
+<body>
+
+
+{% if route == "edit_review" %}
+<h2 class='page-title'>Edit a Movie Review</h2>
+{% else %}
+<h2 class='page-title'>New Movie Review</h2>
+{% endif %}</div></div></div>
+</br>
+
+
+<div class="container" >
+
+        <div id='form-container' class="col-lg-8 col-md-10 mx-auto">
+        
+    <form method='POST' action=''>
+
+{{ form.options.label }}<br>
+            {{ form.options(id='options', onchange='changeTitle()') }}
+
+        <p>{% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <p class="{{ category }}">{{ message }}</p>
+            {% endfor %}
+
+        {% endif %}
+    {% endwith %}</p>
+
+    {% if route == "edit_review" or route == 'new_review_book' %}
+        <img src="{{form.cover_img.data}}" class="responsive-img">
+
+
+
+        {% endif %}
+            </br>
+            <div class='label-title'>
+              {{ form.title.label }}</div>
+            <div class="d-flex justify-content-between align-items-center mt-5">
+              {{ form.title(class='form-control') }}{% if route != 'edit_review' %}<button class="btn btn-primary" type="submit" name="submit2" style="position: relative; left: 5px">Search</button>{% endif %}</p></div>
+              {% for book in books %}
+        <p class="search_results">
+
+    <a href='{{ url_for("books.new_review_book", index=book["title"] ~ "_" ~ book["author_name"]) }}'>{{ book['title'] }} - {{ book['first_publish_year'] }}</a>
+
+
+
+        </p>
+
+    {% endfor %}
+
+
+</br>
+</br>
+{{form.author.label}}
+</br>
+{{form.author(class='form-control')}}
+</br>
+{{form.first_published.label }}
+</br>
+{{form.first_published(class='form-control') }}
+
+</br></br>
+{{ form.subtitle.label}}
+</br>
+{{form.subtitle(class='form-control')}}
+
+              </br></br>
+
+              {{ form.rating.label }}
+              </br>
+              {{ form.rating(class='form-control') }}
+              </br>
+              </br>
+
+              {{ form.post_img.label }}
+              </br>
+              {{ form.post_img(class='form-control') }}
+              </br>
+
+            </br>
+            {{form.cover_img.label }}
+        </br>
+            {{form.cover_img(class='form-control')}}
+        </br>
+              {{ form.body.label }}
+
+              {{ form.body() }}
+
+               <button class="btn btn-dark" type='submit' name="submit1" style='position: relative; left: 0px'>Create Review</button>
+              
+    </form>
+    {{ ckeditor.load(pkg_type='full') }}
+    {{ ckeditor.config(name='body') }}
+
+          
+
+      </div>
+    </div>
+{% include "footer.html" %}

@@ -1,0 +1,27 @@
+@font-face {
+  font-family: 'Speda';
+  src: url('./fonts/speda.woff') format('woff')
+
+}
+
+
+@font-face {
+  font-family: 'NRT-Bd';
+  src: url('./fonts/NRT-Bd.woff') format('woff')
+
+    }
+@font-face {
+  font-family: 'EnglishFont';
+  src: local('Arial'), local('Helvetica'), sans-serif;
+}
+
+
+.english-title {
+  fontfamily: 'EnglishFont';
+}
+
+.arabic-title {
+  font-family: 'NRT-Bd';
+}
+
+

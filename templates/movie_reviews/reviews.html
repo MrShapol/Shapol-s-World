@@ -1,0 +1,229 @@
+{% include "header.html" %}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</br>
+    <title>Movies</title>
+
+
+<style>
+    .postcards-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            padding: 20px;
+            background-color: #fffff5;
+            margin-top: -20px;
+        }
+
+    .postcard {
+        font-family: 'Arial', sans-serif;
+        width: 350px;
+        border: 1px solid #ddd;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        background-color: #212529;
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.3s;
+        margin-right: 30px; /* Change margin-left to margin-right */
+    }
+
+    .postcard:hover {
+        transform: scale(1.03);
+    }
+
+    .poster img {
+        margin-left: 35px;
+        margin-top: 20px;
+        width: 80%;
+        height: auto;
+        border-bottom: 1px solid black;
+    }
+
+    .details {
+        padding: 20px;
+    }
+
+    .details h1 {
+        margin-top: -15px;
+        font-size: 28px;
+
+        font-weight: bold;
+    }
+
+    .details .tagline {
+        font-size: 20px;
+        font-style: italic;
+        margin: 10px 0;
+        color: white;
+    }
+
+.details .english-subtitle {
+        font-size: 16px;
+        margin-bottom: 20px;
+        font-style: italic;
+        color: white;
+        font-family: 'Roboto',sans-serif;
+    }
+
+.details .kurdish-subtitle {
+        font-size: 16px;
+        margin-bottom: 20px;
+        font-style: italic;
+        color: white;
+        font-family: 'Speda',serif;
+    }
+
+
+
+    .gray-text {
+        color: gray;
+    }
+
+    /* Styling for the back-to-top button */
+    #back-to-top-btn {
+        display: none; /* Hidden by default */
+        position: fixed; /* Fixed/sticky position */
+        bottom: 20px; /* Place the button at the bottom of the page */
+        right: 30px; /* Place the button 30px from the right */
+        z-index: 99; /* Make sure it does not overlap */
+        border: none; /* Remove borders */
+        outline: none; /* Remove outline */
+        background-color: #212529; /* Set a background color */
+        color: white; /* Text color */
+        cursor: pointer; /* Add a mouse pointer on hover */
+        padding: 15px; /* Some padding */
+        border-radius: 10px; /* Rounded corners */
+    }
+
+    #back-to-top-btn:hover {
+        background-color: #555; /* Add a dark-grey background on hover */
+    }
+            a {
+            color:white;
+    text-decoration: none; /* Removes underline */
+ /* Ensures anchor tags inherit the text color */
+}
+a:hover {
+    color: rgba(255, 99, 71, 1); /* Color change on hover */
+}
+
+.rating {
+    margin-bottom: -5px;
+    margin-top: -10px;
+}
+
+
+
+ .heading {
+  text-align: center;
+
+   width: 100%;
+   font-weight: 900;
+   font-size: 1.218rem;
+   text-transform: uppercase;
+   letter-spacing: 0.1ch;
+   margin-top: -25px;
+   padding-bottom: 0.5em;
+   color: #212529;
+   position: relative;
+
+
+
+
+}
+ .heading:after {
+
+   content: '';
+   position: absolute;
+   width: 1185px;
+   height: 4px;
+   background: linear-gradient(5deg, rgba(255, 99, 71, 1),black);
+   bottom: 0;
+   margin-bottom: 5px;
+
+     left: 49.6%;
+  transform: translateX(-50%);
+}
+
+
+
+ @media (max-width: 768px) {
+        .heading:after{
+            width: 410px;
+            left: 49.9%;
+
+
+        }
+        .postcards-container {
+            justify-content: flex-start;
+            margin-top: -43px;   
+        }
+        .postcard {
+            width:  ;
+                        margin-left: 30px;
+        }
+
+    }
+
+
+
+
+</style>
+
+
+
+</head>
+
+<body>
+        <h1 class="heading"><span style='color: rgba(255, 99, 71, 1);'>Movies</span> Reviews</h1>
+    <div class="postcards-container">
+        {% for movie in movies %}
+       <a href='{{url_for("third.the_review",id=movie.id)}}'> <div class="postcard">
+            <div class="poster">
+                <img src="{{movie.cover_img}}" alt="Movie Poster">
+            </div>
+            <div class="details">
+                <h1>{{movie.title}}</h1>
+                <p class="tagline">
+                    <div class='rating'>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#d3d301" class="bi bi-star-fill" viewBox="0 0 16 16">
+                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                        </svg>
+                        <span style='font-size: 18px; color: white;'>{{movie.my_rating}}</span><span class="gray-text">/10</span>
+                    </div>
+                </p>
+                <p {% if movie.subtitle | is_arabic %} class="kurdish-subtitle" {% else %}class="english-title"{% endif %}>{{movie.subtitle}}</p>
+            </div></a>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+
+
+<button onclick="topFunction()" id="back-to-top-btn" title="Go to top"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-up-circle" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707z"></path>
+</svg></button>
+
+<script>
+    // Function to scroll to the top of the page
+    function topFunction() {
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE, and Opera
+    }
+
+    // Show the button when user scrolls down 20px from the top of the document
+    window.onscroll = function() {scrollFunction()};
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 900 || document.documentElement.scrollTop > 900) {
+            document.getElementById("back-to-top-btn").style.display = "block";
+        } else {
+            document.getElementById("back-to-top-btn").style.display = "none";
+        }
+    }
+</script>
+
+
+{% include "footer.html" %}

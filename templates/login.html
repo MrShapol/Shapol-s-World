@@ -1,0 +1,28 @@
+{% include "header.html" %}
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+		.error {
+			color:red;
+		}
+	</style>
+</head>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+        	{% if error %}
+        	<p class=error><strong>Error:</strong> {{error}}
+    {% endif %}
+	<form method='POST' action=''>
+		{{form.email.label}}
+		<input type="email" name='email' class="form-control" id="floatingInput" placeholder="name@example.com">
+	</br>
+	    {{form.password.label}}
+	    <input type="password" name='password' class="form-control" id="floatingInput" placeholder="Type your password">
+	    <button class="btn btn-dark w-100 py-2" type='submit'>Sign in</button>
+	</form>
+</div>
+</div>
+</div>
+{% include "footer.html" %}

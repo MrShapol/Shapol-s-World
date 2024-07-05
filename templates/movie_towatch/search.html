@@ -1,0 +1,364 @@
+{% include "header.html" %}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+
+
+	.container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+
+        flex-wrap: wrap;
+        gap: 15px;
+
+
+             
+        }
+
+
+    main {
+    	max-width: 900px;
+        margin:50px auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center; /
+
+
+    }
+
+    body {
+
+
+
+
+
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #121212;
+    color: #fff;
+
+
+    background-image: url('https://wallpapercave.com/wp/wp9109961.jpg');
+    background-size: cover; /* Cover the entire element */
+    background-position: center; /* Center the image */
+
+    height: 100vh;
+    width: 100vw;
+
+
+
+
+
+    }
+
+/* MOVIES */
+
+    .movie-card {
+      display: flex;
+      flex-direction: column;
+      background-color: #222;
+      color: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 15px;
+      max-width: 250px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s;
+    }
+
+    .movie-card:hover {
+      transform: scale(1.05);
+    }
+
+    .poster-container {
+      position: relative;
+    }
+
+    .poster {
+      width: 100%;
+      height: auto;
+    }
+
+    .watchlist-button {
+      position: relative;
+      top: 0px;
+      right: 0px;
+      background-color: rgba(255, 99, 71, 0.9);
+      color: #fff;
+      border: none;
+      padding: 0px 0px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+      .watchedit-button {
+      position: relative;
+      top: 0px;
+      right: 0px;
+      background-color: #00828d;
+      color: #fff;
+      border: none;
+      padding: 0px 0px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .watchlist-button:hover {
+      background-color: rgba(255, 99, 71, 1);
+    }
+
+    .movie-details {
+      padding: 15px;
+    }
+
+    .title {
+      font-size: 1.5em;
+      margin-bottom: 10px;
+    }
+
+    .release-date,
+    .synopsis,
+    .genre,
+    .rating {
+      font-size: 1em;
+      margin: 5px 0;
+    }
+
+    .genre-rating {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+
+
+  .synopsis {
+    max-height: 3em; /* Limits the height of the synopsis */
+    overflow: hidden; /* Hides overflow text */
+    position: relative;
+  }
+
+  .synopsis:after {
+    content: '...'; /* Adds ellipsis after the hidden text */
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: #222; /* Matches the background color of the card */
+    padding-left: 5px;
+  }
+
+  .read-more {
+    color: #f39c12; /* Sets the color for the "Read more" link */
+    cursor: pointer;
+  }
+
+
+        a {
+            color:white;
+    text-decoration: none; /* Removes underline */
+ /* Ensures anchor tags inherit the text color */
+}
+a:hover {
+    color: #0099a6; /* Color change on hover */
+}
+
+
+
+
+.form-control {
+  padding: 10px;
+  width: 600px;
+
+}
+
+
+
+
+@media (max-width: 700px) {
+  .movie-card {
+    max-width: 150px ;
+
+  }
+      .title {
+      font-size: 1.0em;
+      margin-bottom: 10px;
+    }
+  .form-control {
+  padding: 10px;
+  width: 300px;
+
+}
+
+#search-button {
+  padding: 5px 5px;
+}
+.flash-div {
+  font-size: 15px;
+    margin-bottom: -56px;
+  margin-top: 0px;
+}
+
+.success {
+  color: green;
+  font-size: 12px;
+}
+
+
+    }
+
+
+
+#search-button {
+  background-color:rgba(255, 99, 71, 1);
+  color:white;
+  padding: 12px 15px;
+}
+
+.error {
+  color: red;
+
+}
+
+.success {
+  color: green;
+
+}
+
+
+.flash-div {
+    margin-bottom: -56px;
+  margin-top: 0px;
+}
+
+
+ .heading {
+  text-align: center;
+
+   width: 100%;
+   font-weight: 900;
+   font-size: 1.618rem;
+   text-transform: uppercase;
+   letter-spacing: 0.1ch;
+   margin-top: -10px;
+
+   padding-bottom: 0.5em;
+
+   position: relative;
+}
+ .heading:after {
+
+   content: '';
+   position: absolute;
+   width: 285px;
+   height: 4px;
+   background: linear-gradient(150deg, #fea898, #e3e3b2);
+   bottom: 0;
+     left: 50%;
+  transform: translateX(-50%);
+}
+
+
+ .description {
+   width: 100%;
+   text-align: center;
+   margin-top: -5px;
+
+
+
+}
+
+</style>
+<body>
+<main>
+  <p>{{error}}</p>
+{% if route != 'watch-list' %}
+      <h1 class="heading">Search for <span style='color: rgba(255, 99, 71, 1);'>Movies</span></h1>
+      <p class="description">You can search for any Movie that you like</p>
+      <div class='flash-div'>
+                  <p>{% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <p class="{{ category }}">{{ message }}</p>
+            {% endfor %}
+
+        {% endif %}
+    {% endwith %}</p>
+
+<p>{{error}}</p>
+</div>
+<div class='container'>
+	<form method='POST' action='' >
+    <div class="d-flex justify-content-between align-items-center mt-5">
+{{form.search(class="form-control")}} <button  id='search-button' class="btn btn-dark" type='submit' >Search</button></div></br>
+  </form>
+</div>
+{% endif %}
+{% for movie in movies %}
+
+  <div class="movie-card">
+{% if user %}
+    {% if route != 'watch-list' %}
+    <button class="watchlist-button" type="submit" onclick='window.location.href="{{url_for("fourth.add_movie", id=movie.id)}}"'>Add to Watchlist</button>
+    {%else%}
+
+    <button class="watchedit-button" type="submit" onclick='window.location.href="{{url_for("fourth.delete", id=movie.id)}}"'>I Have Watched it</button>
+    {% endif %}
+{% endif %}
+
+
+
+{% if route != 'watch-list' %}
+   <a href='{{url_for("fourth.the_movie",id=movie.id)}}'> <div class="poster-container">
+      <img src='https://image.tmdb.org/t/p/original{{movie["poster_path"]}}' alt="Movie Poster" class="poster">
+      {% else %}
+      <a href='{{url_for("fourth.the_movie_watchlist", id=movie.id)}}'> <div class="poster-container">
+      <img src='https://image.tmdb.org/t/p/original{{movie.cover_img}}' alt="Movie Poster" class="poster">
+      {% endif %}
+    </div>
+    <div class="movie-details">
+      <h3 class="title">{{movie.title}}</h3>
+      <p class="release-date">{{movie.release_date}}</p>
+      <p class="synopsis">{{movie.overview}}</p>
+      <div class="genre-rating">
+{% if route != 'watch-list' %}
+        <p class="rating">Rating: {{movie.vote_average | round(1)}}</p>
+        {% else %}
+        <p class="rating">Rating: {{movie.rating | round(1)}}</p>
+        {% endif %}
+
+      </div>
+    </div></a>
+  </div>
+{% endfor %}
+
+
+
+</main>
+
+
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const readMoreLinks = document.querySelectorAll('.read-more');
+
+    readMoreLinks.forEach(link => {
+      link.addEventListener('click', function() {
+        const synopsis = this.previousElementSibling;
+        synopsis.style.maxHeight = 'none'; // Removes the height limit
+        this.style.display = 'none'; // Hides the "Read more" link
+      });
+    });
+  });
+</script>
+
+
+
+
+</body>

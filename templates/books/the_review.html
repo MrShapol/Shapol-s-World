@@ -1,0 +1,352 @@
+{% include "header.html" %}
+
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{review.title}} Review</title>
+    <style>
+
+        body {
+        font-family: {% if is_arabic_text.body %}'Speda', serif{% else %} 'Roboto', sans-serif{% endif %};
+
+        }
+
+.container {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 20px;
+    padding: 20px;
+    justify-content: center;
+    align-items: flex-start;
+    position: relative;
+    right: 50px;
+
+
+}
+
+
+
+
+.the_post {
+    max-width: 850px;
+    flex:1;
+    display: flex;
+    justify-content: center;
+        }
+
+
+.post-container {
+     background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 850px;
+    padding: 20px;
+    overflow-wrap: break-word;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* New: Center items within post-container */
+    transition: transform 0.3s;
+        }
+
+
+
+.post-header {
+    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    width: 100%;
+
+}
+
+.post-title {
+    font-size: 30px;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-family: {% if is_arabic_text.title %}'Speda', serif{% else %} 'Roboto', sans-serif{% endif %};
+
+}
+
+.post-meta {
+    font-size: 15px;
+    color: #777777;
+    margin-top: 5px;
+                    display: flex;
+            flex-wrap: wrap;
+    justify-content: center;
+    position: relative;
+    left: 5px;
+
+    width: 100%;
+
+}
+
+.post-image img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 20px;
+
+}
+
+.post-content p {
+    line-height: 1.6;
+    color: #333333;
+    margin-bottom: 10px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+
+
+.subtitle {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    position: relative;
+    font-family: {% if is_arabic_text.subtitle %}'Speda', serif{% else %} 'Roboto', sans-serif{% endif %};
+
+}
+
+.rating {
+    font-family:sans-serif;
+                            display: flex;
+            flex-wrap: wrap;
+    justify-content: center;
+    position: relative;
+    margin-top: -15px;
+    margin-bottom: 5px;
+    font-size: 25px;
+    gap: 3px;
+
+}
+
+.gray-text {
+    color: grey;
+}
+
+
+
+/* This is Cover's CSS */
+
+
+
+
+.the_cover {
+    width: 250px;
+    flex: 0 0 auto;
+    font-family: 'Roboto',sans-serif;
+        }
+
+.cover-container {
+    background-color: #212529;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 250px; /* New: Match the width of .the_cover */
+    padding: 20px;
+    justify-content: flex-start;
+    align-items: flex-start;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s;
+        }
+
+.cover-header {
+    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+}
+
+.cover-title {
+    font-size: 24px;
+    margin: 0;
+    color: white;
+}
+
+.cover-image img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.cover-content p {
+    line-height: 1.6;
+    color: white;
+    margin-bottom: 10px;
+}
+
+
+
+.cover-content p:first-child{
+    font-size: 1.0em;
+    font-weight:bold;
+
+
+}
+
+.cover-content p:nth-child(2) {
+    font-size: 1.0em;
+
+}
+
+
+.cover-content p:nth-child(3) {
+    font-size: 1.0em;
+    color: #00b4c4;
+
+}
+
+
+.cover-content p:nth-child(4) {
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-top: 20px;
+            
+
+        }
+
+.cover-content p:nth-child(5){
+    text-align: left;
+}
+
+
+
+    @media (max-width: 768px) {
+        .container {
+            flex-direction: column;
+            align-items: center;
+            gap: 10px; /* Reduce gap between items */
+            right: 0; /* Center align */
+        }
+
+        .rating {
+            margin-left: 0; /* Center align */
+
+        }
+
+        .the_cover, .cover-container {
+            max-width: 350px; /* Reduce the size of the cover */
+            width: 100%;
+            order: 3; /* Show the cover under the post */
+        }
+
+        .the_post {
+            order: 1; /* Show the post at the top */
+        }
+
+        .button-class {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    position: relative;
+    left: 100px;
+    margin-right: 100px;
+
+}
+
+    }
+
+
+
+.button-class {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    position: relative;
+    left: 100px;
+
+}
+#button {
+    padding: 10px 20px;
+
+    font-family: 'Roboto', sans-serif;
+}
+
+.delete-btn {
+    position: absolute;
+    top: 20px;
+    right:30px;
+    z-index: 1000;
+}
+
+.delete-btn a {
+     text-decoration: none;
+    font-size: 20px;
+    color: #ff7878;
+    font-family: "Roboto", sans-serif;
+        }
+
+
+</style>
+      </head>
+<body>
+
+<!-- This is COVER's Code -->
+ <div class="container">
+    <div class='the_cover'>
+    <div class="cover-container">
+        <div class="cover-header">
+            <h1 class="cover-title">Book's Poster</h1>
+
+        </div>
+        <div class="cover-image">
+            <img src="{{review.cover_img}}" alt="cover Image">
+        </div>
+        <div class="cover-content">
+            <p>Release Date: {{review.first_published}}</p>
+            <p>Books Author: {{review.writer}}
+            <p>Rating Openlibrary: {{review.ratings_average|round(1) }}</p>
+            <p>First Sentence:</p>
+            <p>{{review.first_sentence}}</p>
+
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<!-- This is POST's Code -->
+<div class='delete-btn'><a href='{{url_for("books.delete",id=review.id)}}'>X</a></div>
+<div class='the_post'>
+    <div class="post-container">
+        <div class="post-header">
+            <h1 class="post-title">{{review.title}}</h1>
+            <div class="post-meta">
+             <span class="post-author">by {{review.author.name}},  </span>
+             <span class="post-date"> {{review.date}}</span>
+         </div>
+     </div>
+
+     <div class='rating'>
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#d3d301" class="bi bi-star-fill" viewBox="0 0 16 16">
+            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+        </svg><span >{{review.my_rating}}</span><span class="gray-text">/5</span>
+    </div>
+
+    <div class="post-image">
+        <img src="{{review.post_img}}" alt="Post Image">
+    </div>
+    <div class="post-content">
+        <h4 class='subtitle'>"{{review.subtitle}}"</h4>
+    </br>
+    <p>{{review.body| safe }}</p>
+</div>
+</div>
+</div>
+</div>
+<div class='button-class'>
+<a id='button' class="btn btn-dark float-right" href='{{url_for("books.edit_review", id=review.id)}}'>Edit</a></div>
+</body>
+</html>
+
+{% include "footer.html" %}

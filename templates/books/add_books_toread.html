@@ -1,0 +1,170 @@
+{% include "header.html" %}
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+	form {
+		padding: 10px;
+		border: 1px solid #ccc;
+		border-radius: 5px;
+		border-color: gray;
+        }
+
+	.container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+
+             
+        }
+
+
+    main {
+    	        max-width: 900px;
+        margin:290px auto;
+
+
+    }
+    body {
+
+    	 margin: 0px auto;
+    padding: 0;
+
+    	background-image: url('https://static.vecteezy.com/system/resources/previews/023/636/965/non_2x/retro-big-library-illustration-ai-generative-free-photo.jpg');
+    	    background-size: cover; /* Cover the entire element */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat;
+        height: 100vh;
+    width: 100vw;
+
+       text-align: center;
+
+
+
+
+    }
+
+    .search_results {
+        margin-bottom: 6px;
+        text-align: left;
+
+        justify-content: left;
+        align-items: left;
+
+
+    }
+
+    a {
+        text-decoration: none;
+    }
+    .title {
+
+  position: relative;
+  top: -45px;
+  left: 10px;
+  font-size: 22px;
+  text-decoration: none;
+  font-family: Arial,sans-serif;
+  color: #FFFFF0;
+  
+    }
+    .author_name {
+        position: relative;
+          right: 150px;
+          top: -120px;
+          color:#FFFFF0;
+
+    }
+    .first_sentence {
+        position: relative;
+        margin-top: 0;
+        margin-bottom: -100px;
+        margin-left: 120px;
+        margin-right: 80px;
+        top: -120px;
+        text-align: left;
+        font-size: 15px;
+        color:#FFFFF0;
+
+    }
+
+    .styled-hr {
+    border: 0;
+    height: 2px;
+    background: #333;
+    margin: 20px 0;
+}
+
+
+
+
+
+.form-control {
+  padding: 10px;
+  width: 800px;
+
+}
+
+.btn {
+  padding: 10px 10px;
+}
+
+
+@media (max-width: 700px) {
+
+  .form-control {
+  padding: 5px;
+  width: 380px;
+
+}
+
+.author_name {
+            position: relative;
+          right: 10px;
+          top: -120px;
+          color:#FFFFF0;
+
+}
+
+.btn {
+  padding: 5px 5px;
+}
+
+    }
+
+</style>
+<body>
+<main>
+
+<div class='container'>
+	<form method='POST' action='' style='background-color: #212529;'>
+        <div class="d-flex justify-content-between align-items-center mt-5">
+{{form.search(class='form-control')}} <button style='background-color:#f1f1e2;color:black' class="btn btn-dark" type='submit' >Search</button></div></br>
+
+        {% for book in books %}
+        <p class="search_results">
+        <a href=#>
+        {% if book['cover_edition_key'] %}
+        <img src='https://covers.openlibrary.org/b/olid/{{book["cover_edition_key"]}}-M.jpg' width='99px' height='160px'>
+        {% elif book['cover_id'] %}
+        <img src='https://covers.openlibrary.org/b/id/{{book["cover_id"]}}-M.jpg' width='99px' height='160px'>
+        {% else %}
+        <img src="{{url_for('static', filename='pictrues/no-pic-found.jpg')}}" width='99px' height='160px'>{% endif %}
+        <span class='title'>{{book['title']}}</span>
+        <p class='author_name' style='color:gray;'>{{book['author_name'][0]}} - {{book['first_publish_year']}}</p>{% if book['first_sentence'] %}
+        <p class='first_sentence'>{{book['first_sentence'][0]}}</p>{% endif %}</a></p>
+    </br>
+        <hr class="styled-hr">
+{% endfor %}
+
+
+
+
+</form>
+</div>
+
+</main>
+
+
+
+</body>

@@ -1,0 +1,58 @@
+{% include "header.html" %}
+{% block content %}
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+		.box { 
+	text-align:center;
+
+}
+
+
+
+.welcome-text {
+    max-width: 500px;
+    font-family: "Speda";
+    position: relative;
+    left: 392px;
+    top: 0px;
+    font-size: 20px;
+}
+
+
+
+
+@media (max-width: 600px) {
+
+	.welcome-text {
+		left: 0;
+		text-align: center;
+		margin: 0 auto;
+		top: 10px;
+	}
+}
+
+</style>
+		</head>
+
+<div class="box">
+	<h1 style='font-family: "NRT-bD";color:#212529 ;'>Welcome To Shapol's World</h1>
+	<div style='border: 10px solid #212529; display: inline-block;'>
+	<img style="width: 100%;" src='https://i.pinimg.com/564x/bb/39/c2/bb39c231fcc06d19499c8822ac6b7ee2.jpg' style=': 90px;'>
+</div>
+</hr>
+
+</br>
+	<p class=welcome-text>بەخێربێیت بۆ بڵۆگەکەم، ئەم بڵۆگە شەخسیە و تایبەتە بە پۆست و بابەتی شەخسی، بۆیە لەم بڵۆگە هەڵبژاردەی دروستکردنی هەژمار بوونی نیە
+</p>
+
+
+</br>
+  <a href="{{ url_for('login') }}" class="btn btn-dark w-50 py-2">Login</a>
+
+
+
+</div>
+{% endblock %}
+{% include "footer.html" %}

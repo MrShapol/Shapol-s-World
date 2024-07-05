@@ -1,0 +1,455 @@
+{% include "header.html" %}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+  <script src="https://www.google.com/recaptcha/enterprise.js?render=6LdrrwMqAAAAAMYpIAHKt1fVW0V_yAAa_MwyCD6i"></script>
+  <!-- Your code -->
+</head>
+<style>
+
+
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+
+        flex-wrap: wrap;
+        gap: 15px;
+
+
+             
+        }
+
+
+    main {
+        max-width: 900px;
+        margin:50px auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center; /
+
+
+    }
+
+
+
+/* booksS */
+
+    .books-card {
+      display: flex;
+      flex-direction: column;
+      background-color: #222;
+      color: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 15px;
+      max-width: 250px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s;
+    }
+
+    .books-card:hover {
+      transform: scale(1.05);
+    }
+
+    .poster-container {
+      position: relative;
+    }
+
+    .poster {
+      width: 100%;
+      height: auto;
+    }
+
+    .watchlist-button {
+      position: relative;
+      top: 0px;
+      right: 0px;
+      background-color: #eeaa00;
+      color: #fff;
+      border: none;
+      padding: 0px 0px;
+      border-radius: 0px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+      .watchedit-button {
+      position: relative;
+      top: 0px;
+      right: 0px;
+      background-color: #00828d;
+      color: #fff;
+      border: none;
+      padding: 0px 0px;
+
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .watchlist-button:hover {
+      background-color: #ffba0c;
+    }
+
+    .books-details {
+      padding: 15px;
+    }
+
+    .title {
+      font-size: 1.5em;
+      margin-bottom: 10px;
+    }
+
+    .release-date,
+    .synopsis,
+    .genre,
+    .rating {
+      font-size: 1em;
+      margin: 5px 0;
+    }
+
+    .author_name {
+      font-size: 1em;
+      margin: 5px 0;
+    }
+
+    .genre-rating {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+
+
+  .synopsis {
+    max-height: 3em; /* Limits the height of the synopsis */
+    overflow: hidden; /* Hides overflow text */
+    position: relative;
+    font-style: italic;
+  }
+
+  .synopsis:after {
+    content: '...'; /* Adds ellipsis after the hidden text */
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: #222; /* Matches the background color of the card */
+    padding-left: 5px;
+  }
+
+  .read-more {
+    color: #f39c12; /* Sets the color for the "Read more" link */
+    cursor: pointer;
+  }
+
+
+        a {
+            color:white;
+    text-decoration: none; /* Removes underline */
+ /* Ensures anchor tags inherit the text color */
+}
+a:hover {
+    color: #0099a6; /* Color change on hover */
+}
+
+
+
+
+
+
+.form-control {
+  padding: 10px;
+  width: 500px;
+ background-color: #2e2e2e;
+    color: #e0e0e0;
+}
+
+
+.form-control::placeholder {
+    color: #9e9e9e; /* Placeholder color */
+}
+
+.form-control:focus {
+    border-color: #6200ea !important;
+    background-color: #2e2e2e !important;
+    color: #e0e0e0 !important;
+    outline: none !important; /* Remove default outline */
+}
+
+
+
+
+@media (max-width: 700px) {
+  .books-card {
+    max-width: 170px ;
+
+  }
+
+      .title {
+      font-size: 1.2em;
+      margin-bottom: 10px;
+    }
+
+#search-button {
+  padding: 5px 5px;
+}
+
+.form-control {
+  padding: 10px;
+  width: 300px;
+ background-color: #2e2e2e;
+    color: #e0e0e0;
+  }
+
+
+
+    .release-date,
+    .synopsis,
+    .genre,
+    .rating {
+      font-size: 0.9em;
+      margin: 5px 0;
+    }
+
+    .author_name {
+      font-size: 0.9em;
+      margin: 5px 0;
+    }
+
+    .genre-rating {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1em;
+    }
+
+
+
+  .synopsis {
+    max-height: 3em; /* Limits the height of the synopsis */
+    overflow: hidden; /* Hides overflow text */
+    position: relative;
+    font-style: italic;
+    font-size: 0.8em;
+  }
+
+
+.flash-div {
+  font-size: 15px;
+    margin-bottom: -56px;
+  margin-top: 0px;
+}
+
+.success {
+  color: green;
+  font-size: 12px;
+}
+
+  }
+
+
+
+
+
+
+#search-button {
+  background-color: #eeaa00;
+  color:white;
+  padding: 10px 10px;
+  border:10px;
+}
+
+.error {
+  color: red;
+}
+
+.success {
+  color: green;
+}
+
+
+.flash-div {
+    margin-bottom: -56px;
+  margin-top: 0px;
+}
+
+
+
+ .heading {
+  text-align: center;
+
+   width: 100%;
+   font-weight: 900;
+   font-size: 1.618rem;
+   text-transform: uppercase;
+   letter-spacing: 0.1ch;
+   margin-top: -10px;
+
+   padding-bottom: 0.5em;
+
+   position: relative;
+}
+ .heading:after {
+
+   content: '';
+   position: absolute;
+   width: 285px;
+   height: 4px;
+   background: linear-gradient(0deg, #2e2e2e, black);
+   bottom: 0;
+     left: 50%;
+  transform: translateX(-50%);
+}
+
+
+ .description {
+   width: 100%;
+   text-align: center;
+   margin-top: -5px;
+
+}
+
+</style>
+<body>
+<main>
+<p>{{error}}</p>
+{% if route != 'book-to-read' %}
+    <h1 class="heading">Search for <span style='color:#eeaa00;'>Books</span></h1>
+      <p class="description">You can search for any book that you like</p>
+<div class='flash-div'>
+            <p>{% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <p class="{{ category }}">{{ message }}</p>
+            {% endfor %}
+
+        {% endif %}
+    {% endwith %}</p>
+
+
+</div>
+
+
+
+
+<div class='container'>
+    <form method='POST' action='' >
+    <div class="d-flex justify-content-between align-items-center mt-5">
+{{form.search(class="form-control")}} <button  id='search-button' class="btn btn-dark" type='submit' >Search</button></div></br>
+
+  </form>
+
+</div>
+{% endif %}
+{% for book in books %}
+
+  <div class="books-card">
+{% if user %}
+    {% if route != 'book-to-read' %}
+    <button class="watchlist-button" type="submit" onclick='window.location.href="{{ url_for("books.add_to_read", index=book["title"] ~ "_" ~ book["author_name"] ~ "_" ~ book["first_publish_year"])}}"' >Add To-Read-list</button>
+
+    {%else%}
+
+    <button class="watchedit-button" type="submit" onclick='window.location.href="{{url_for("books.i_have_read_it", id=book.id)}}"'>I Have Read it</button>
+    {% endif %}
+{% endif %}
+
+
+
+
+{% if route != 'book-to-read' %}
+   <a href='{{ url_for("books.the_book", index=book["title"] ~ "_" ~ book["author_name"] ~ "_" ~ book["first_publish_year"])}}'> <div class="poster-container">
+    {% if book.cover_edition_key %}
+      <img src='https://covers.openlibrary.org/b/olid/{{book.cover_edition_key}}-L.jpg' alt="books Poster" class="poster">
+      {% elif book.cover_i %}
+      <img src='https://covers.openlibrary.org/b/id/{{book.cover_i}}-L.jpg' alt="books Poster" class="poster">
+      {% else %}
+      <img src='\static\pictrues\no-pic-found.jpg' alt="books Poster" class="poster">
+      {% endif %}
+
+{% else %}
+<a href='{{ url_for("books.to_read_book", id=book.id)}}'> 
+  <div class="poster-container">
+      <img src='{{book.cover_img}}' alt="books Poster" class="poster">
+{% endif %}
+
+    </div>
+    {% if route != 'book-to-read' %}
+    <div class="books-details">
+      <h3 class="title">{{book.title}}</h3>
+      <p class="author_name">{{book.author_name[0]}}</p>
+      <p class="release-date">{{book.first_publish_year}}</p>
+      {% if book.first_sentence %}
+      <p class="synopsis">{{book.first_sentence[0]}}</p>
+      {% endif %}
+
+
+      {% else %}
+      <div class="books-details">
+      <h3 class="title">{{book.title}}</h3>
+      <p class="author_name">{{book.writer}}</p>
+      <p class="release-date">{{book.first_published}}</p>
+      <p class="synopsis">{{book.first_sentence}}</p>
+      {% endif %}
+
+
+      <div class="genre-rating">
+{% if route != 'book-to-read' %}
+
+
+
+
+
+{%if book.ratings_average%}
+        {% if book.ratings_average is number %}
+        <p class="rating">Rating: {{book.ratings_average | round(1)}}</p>
+        {% else %}
+        <p class="rating">Rating: {{book.ratings_average}}</p>
+        {%endif%}
+{% endif %}
+
+
+{% else %}
+{%if book.rating %}
+<p class="rating">Rating: {{book.rating | round()}}</p>
+{% else %}
+<p class="rating">Rating: None</p>
+{% endif %}
+
+
+
+{% endif %}
+
+
+      </div>
+    </div></a>
+  </div>
+{% endfor %}
+
+
+
+</main>
+
+
+
+
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const readMoreLinks = document.querySelectorAll('.read-more');
+
+    readMoreLinks.forEach(link => {
+      link.addEventListener('click', function() {
+        const synopsis = this.previousElementSibling;
+        synopsis.style.maxHeight = 'none'; // Removes the height limit
+        this.style.display = 'none'; // Hides the "Read more" link
+      });
+    });
+  });
+</script>
+
+
+
+
+</body>

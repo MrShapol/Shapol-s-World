@@ -1,0 +1,126 @@
+{% include "header.html" %}
+
+
+    <header>
+        <style>
+            .responsive-img {
+                width: 100%;
+                max-width: 600px; /* Adjust this value based on your design */
+                height: auto;
+            }
+            /* Media query for smartphones */
+
+            @media (max-width: 600px) {
+
+
+        .error {
+            color: red; }
+
+        .success {
+            color: green;
+        }
+
+
+        #post-body {
+            font-size: 20px;
+        }
+
+
+
+
+        main {
+            
+            padding: 20px;
+            max-width: 900px;
+            margin:0 auto;
+        }
+        
+        .post h2 {
+            color: #333;
+        }
+        .post-meta {
+            color: #9a5d0a;
+            font-size: 0.7em;
+        }
+        .post-content {
+            font-size: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+             /* Adjust height as needed */
+
+        }
+        .form {
+
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+
+
+    </style>
+
+    </header>
+    <main>
+        <article class="post" style='text-align: center;'>
+            <h2 >{{movie.title}} </h2>
+            <div class="post-content">
+                <img id='post-img' src={{movie.img_url}} alt="Description of the image" class="responsive-img">
+
+            </br>
+            
+            
+        </br>
+                <p  id='post-body'>{{movie.overview}}</p>
+
+{% if movie.id == 0 %}    
+
+
+{% elif user %}
+<a  href="{{url_for('fourth.delete_recommend_movie', id=movie.id)}}" class='post-meta' type="button" >I Have Watched this 👀📽️🍿</a>
+
+
+
+{% endif %}
+        </br>
+    </br>
+    {% if not movie.id == 0 %}
+            <form method='POST' ><button class="btn btn-primary" type='submit' name='submit1' >Another One...☝️</button></form>
+            
+            </div>
+        </article>
+        <!-- Add more articles for additional blog posts -->
+</br></br></br>
+{% endif %}
+</br></br></br></br></br>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <a href='{{url_for("login")}}' class="{{ category }}">{{ message }}</a>
+            {% endfor %}
+
+        {% endif %}
+    {% endwith %}
+        <div class="container">
+
+            
+        <form class='form' method="POST">
+
+                    {{form.add(size=50)}}<button class="btn btn-dark" type='submit' name='submit2' >Search</button>
+                </br>
+                {% for movie in movies %}
+        <p class="search_results">
+        <a href={{url_for('fourth.add_recommend_movie',id=movie['id'])}}>{{movie['title']}} - {{movie['release_date']}}</a>
+        </p>
+
+    {% endfor %}
+            </form>
+        </div>
+    </main>
+</body>
+</html>
+{% include "footer.html" %}

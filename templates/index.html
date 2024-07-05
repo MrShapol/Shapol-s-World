@@ -1,0 +1,264 @@
+{% include "header.html" %}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</br>
+<style> 
+
+
+
+.blog-posts-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: flex-start; /* Align posts from left to right */
+    margin-left: 20px;
+}
+
+.blog-post {
+    background-color: #212529;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 380px; /* Adjusted width */
+    height: 500px; /* Ensure each post occupies full height */
+    transition: transform 0.2s;
+    display: flex;
+    flex-direction: column; /* Ensure content stacks properly */
+}
+
+.blog-post:hover {
+    transform: translateY(-5px);
+}
+
+.post-image {
+    position: relative;
+    overflow: hidden;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    flex: 1; /* Make image take up remaining space */
+}
+
+.post-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease-in-out;
+}
+
+.post-image:hover img {
+    transform: scale(1.1);
+}
+
+.post-content {
+    padding: 20px;
+    flex-shrink: 0; /* Prevent content from expanding */
+}
+
+.english-title {
+
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    font-family: 'Roboto',sans-serif;
+
+}
+
+
+.kurdish-title {
+
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    font-family: 'Speda',serif;
+
+}
+
+
+
+
+
+
+
+
+
+.post-date {
+    color: grey;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+}
+
+.english-subtitle {
+    color: white;
+    line-height: 1.5;
+    margin-bottom: 15px;
+    overflow: hidden; /* Prevents long text from overflowing */
+    text-overflow: ellipsis; /* Truncates long text with ellipsis */
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Show up to 3 lines of text */
+    -webkit-box-orient: vertical;
+    font-family: 'Roboto',sans-serif;
+
+}
+
+
+
+.kurdish-subtitle {
+    color: white;
+    line-height: 1.5;
+    margin-bottom: 15px;
+    overflow: hidden; /* Prevents long text from overflowing */
+    text-overflow: ellipsis; /* Truncates long text with ellipsis */
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Show up to 3 lines of text */
+    -webkit-box-orient: vertical;
+    font-family: 'Speda', serif;
+
+}
+
+
+
+
+.gray-text {
+    color: grey;
+    font-size: 13px;
+}
+
+.label {
+    color: #0099a6;
+    margin:0;
+    margin-bottom: -15px;
+    font-style: italic;
+
+}
+
+        a {
+            color:white;
+    text-decoration: none; /* Removes underline */
+ /* Ensures anchor tags inherit the text color */
+}
+a:hover {
+    color: #0099a6; /* Color change on hover */
+}
+
+.rating {
+    margin-bottom: -5px;
+    margin-top: -10px;
+}
+
+
+    @media (max-width: 768px) {
+        heading {
+            left: 5%;
+
+
+        }
+
+    }
+
+
+
+ .heading {
+  text-align: center;
+
+   width: 100%;
+   font-weight: 900;
+   font-size: 1.218rem;
+   text-transform: uppercase;
+   letter-spacing: 0.1ch;
+   margin-top: -25px;
+   padding-bottom: 0.5em;
+   position: relative;
+
+}
+ .heading:after {
+
+   content: '';
+   position: absolute;
+   width: 1270px;
+   height: 4px;
+   background: linear-gradient(150deg, #0099a6,black);
+   bottom: 0;
+   margin-bottom: 5px;
+     left: 50%;
+  transform: translateX(-50%);
+}
+
+
+ @media (max-width: 768px) {
+        .heading:after{
+            width: 410px;
+            left: 49.9%;
+
+        }
+
+    }
+
+
+
+
+</style>
+<body>
+
+    <h1 class="heading">the <span style='color: #0099a6;'>{% if route == 'home' %}posts{%else%}Writings{%endif%}</span></h1>
+
+    <div class="blog-posts-container">
+        {% for post in posts %}
+                <!-- Writing Post -->
+     <a href='{% if post.post_type == "Writing" %}{{url_for("the_post",index=post.id)}}
+     {% elif post.post_type == "Movie Review" %}{{url_for("third.the_review",id=post.id)}}{% elif post.post_type == "Book Review" %}
+     {{url_for("books.review",id=post.id)}}{% endif %}'>   <div class="blog-post">
+            <div class="post-image">
+                <img src="{{post.post_img}}" alt="Writing Image">
+            </div>
+            <div class="post-content">
+                <h2 {% if post.title | is_arabic %} class="kurdish-title" {% else %}class="english-title"{% endif %}>{{post.title}}</h2>
+                {% if post.post_type == 'Book Review' or post.post_type == 'Movie Review' %}
+                <p><div class='rating'><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#bfbf00" class="bi bi-star-fill" viewBox="0 0 16 16">
+  <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+</svg> <span style='font-size: 14px; color: white;'>{{post.my_rating}}</span><span class="gray-text">{% if post.post_type == 'Movie Review' %}/10{% else %}/5{% endif %}</span></div></p>
+{% endif %}
+
+{% if post.post_type == 'Writing' %}
+                <p class="post-date">{{post.date}}</p>
+                {% endif %}
+                <p {% if post.subtitle | is_arabic %} class="kurdish-subtitle" {% else %}class="english-subtitle"{% endif %}>"{{post.subtitle}}"</p>
+                {% if route != 'posts' %}
+                <p class="label">{{post.post_type}}</p>
+                {% endif %}
+                
+            </div>
+        </div></a>
+        {% endfor %}
+    </div>
+    
+</body>
+
+
+<button onclick="topFunction()" id="back-to-top-btn" title="Go to top"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-up-circle" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707z"></path>
+</svg></button>
+
+
+
+
+
+
+
+<script>
+    // Function to scroll to the top of the page
+    function topFunction() {
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE, and Opera
+    }
+
+    // Show the button when user scrolls down 20px from the top of the document
+    window.onscroll = function() {scrollFunction()};
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 900 || document.documentElement.scrollTop > 900) {
+            document.getElementById("back-to-top-btn").style.display = "block";
+        } else {
+            document.getElementById("back-to-top-btn").style.display = "none";
+        }
+    }
+</script>
+
+
+{% include "footer.html" %}
