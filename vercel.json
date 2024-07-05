@@ -1,0 +1,35 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "main.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "main.py"
+    },
+    {
+      "src": "/movies/reviews(.*)",
+      "dest": "movie_review.py"
+
+    },
+        {
+      "src": "/movies(.*)",
+      "dest": "recommend_movie.py"
+
+    },
+        {
+      "src": "/movies/top_movies(.*)",
+      "dest": "top_movies_routes.py"
+
+    },
+            {
+      "src": "/books(.*)",
+      "dest": "books.py"
+
+    }
+  ]
+}
